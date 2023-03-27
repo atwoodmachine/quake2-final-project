@@ -623,7 +623,7 @@ void rocket_think(edict_t* self) {
 	aimdir[0] = crandom();
 	aimdir[1] = crandom();
 	aimdir[2] = crandom();
-	fire_grenade(self->owner, self->s.origin, aimdir, 25, 100, 50, 2);
+	fire_grenade(self->owner, self->s.origin, aimdir, 25, 100, 10, 2);
 }
 
 void fire_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int radius_damage)

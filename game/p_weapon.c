@@ -1333,6 +1333,18 @@ void weapon_railgun_fire (edict_t *ent)
 	VectorSet(offset, 0, 7,  ent->viewheight-8);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 	fire_rail (ent, start, forward, damage, kick);
+	// edit
+	vec3_t aimdir = { 0 };
+	vec3_t aimdir2 = { 0 };
+	
+	aimdir[0] = start[0] + 10;
+	aimdir[1] = start[1] + 10;
+	aimdir[2] = start[2] + 10;
+	aimdir2[0] = start[0] - 10;
+	aimdir2[1] = start[1] - 10;
+	aimdir2[2] = start[2] - 10;
+	fire_rail(ent, aimdir, forward, damage, kick);
+	fire_rail(ent, aimdir2, forward, damage, kick);
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);
