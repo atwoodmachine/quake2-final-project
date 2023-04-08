@@ -866,7 +866,7 @@ void bfg_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf
 	self->s.frame = 0;
 	self->s.sound = 0;
 	self->s.effects &= ~EF_ANIM_ALLFAST;
-	self->think = G_FreeEdict; //bfg_explode
+	self->think = bfg_explode; 
 	self->nextthink = level.time + FRAMETIME;
 	self->enemy = other;
 
@@ -973,9 +973,9 @@ void fire_bfg (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, f
 	VectorClear (bfg->maxs);
 	bfg->s.modelindex = gi.modelindex ("sprites/s_bfg1.sp2");
 	bfg->owner = self;
-	bfg->touch = bfg_touch; //bfg_touch
-	bfg->nextthink = level.time + 8000; // /speed
-	bfg->think = G_FreeEdict;
+	bfg->touch = bfg_touch; 
+	bfg->nextthink = level.time + 5; // /speed
+	bfg->think = bfg_think;
 	bfg->radius_dmg = damage;
 	bfg->dmg_radius = damage_radius;
 	bfg->classname = "bfg blast";
