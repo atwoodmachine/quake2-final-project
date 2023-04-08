@@ -1412,7 +1412,16 @@ void weapon_bfg_fire (edict_t *ent)
 
 	VectorSet(offset, 8, 8, ent->viewheight-8);
 	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
-	fire_bfg (ent, start, forward, damage, 400, damage_radius);
+	//fire_bfg (ent, start, forward, damage, 400, damage_radius);
+
+	// bfg now heals
+	if (ent->health + 25 > ent->max_health) {
+		ent->health = ent->max_health;
+	}
+	else {
+		ent->health += 25;
+	}
+	
 
 	ent->client->ps.gunframe++;
 
