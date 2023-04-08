@@ -580,10 +580,10 @@ static void Grenade_Explode2(edict_t* ent)
 
 	vec3_t aimdir = { 0 };
 	for (int i = 0; i < 5; i++) {
-		aimdir[0] = crandom();
-		aimdir[1] = crandom();
-		aimdir[2] = crandom();
-		fire_grenade(ent->owner, ent->s.origin, aimdir, 25, 100, 5, 2);
+		aimdir[0] = crandom() *3;
+		aimdir[1] = crandom() *3;
+		aimdir[2] = crandom() *3;
+		fire_grenade(ent->owner, ent->s.origin, aimdir, 25, 100, 2, 2);
 	}
 
 	G_FreeEdict(ent);
