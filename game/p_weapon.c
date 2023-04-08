@@ -726,7 +726,7 @@ void weapon_grenadelauncher_fire (edict_t *ent)
 	ent->client->kick_angles[0] = -1;
 
 	//fire_grenade (ent, start, forward, damage, 600, 2.5, radius);
-	fire_bfg(ent, start, forward, damage, 600, 50);
+	fire_bfg(ent, start, forward, 0, 200, 0);
 
 	gi.WriteByte (svc_muzzleflash);
 	gi.WriteShort (ent-g_edicts);
@@ -819,6 +819,8 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	vec3_t	forward, right;
 	vec3_t	start;
 	vec3_t	offset;
+	vec3_t	aimdir;
+	vec3_t	aimdir2;
 
 	if (is_quad)
 		damage *= 4;
@@ -831,6 +833,19 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	ent->client->kick_angles[0] = -1;
 
 	fire_blaster (ent, start, forward, damage, 1000, effect, hyper);
+
+	aimdir[0] = start[0] + 15;
+	aimdir[1] = start[1];
+	aimdir[2] = start[2];
+	aimdir2[0] = start[0] - 15;
+	aimdir2[1] = start[1];
+	aimdir2[2] = start[2];
+
+	if (!hyper) {
+		fire_blaster(ent, aimdir, forward, damage / 2, 1000, effect, hyper);
+		fire_blaster(ent, aimdir2, forward, damage / 2, 1000, effect, hyper);
+	}
+
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);
