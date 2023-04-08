@@ -1204,6 +1204,7 @@ void weapon_shotgun_fire (edict_t *ent)
 	vec3_t		offset;
 	int			damage = 4;
 	int			kick = 8;
+	vec3_t		aimdir;
 
 	if (ent->client->ps.gunframe == 9)
 	{
@@ -1227,8 +1228,14 @@ void weapon_shotgun_fire (edict_t *ent)
 
 	if (deathmatch->value)
 		fire_shotgun (ent, start, forward, damage, kick, 500, 500, DEFAULT_DEATHMATCH_SHOTGUN_COUNT, MOD_SHOTGUN);
-	else
-		fire_shotgun (ent, start, forward, damage, kick, 500, 500, DEFAULT_SHOTGUN_COUNT, MOD_SHOTGUN);
+	//else
+		//fire_shotgun (ent, start, forward, damage, kick, 500, 500, DEFAULT_SHOTGUN_COUNT, MOD_SHOTGUN);
+	for (int i = 0; i < 40; i++) {
+		aimdir[0] = crandom();
+		aimdir[1] = crandom();
+		aimdir[2] = crandom();
+		fire_blaster(ent, start, aimdir, damage, 500, MZ2_FLOAT_BLASTER_1, false); //effect? 
+	}
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);
