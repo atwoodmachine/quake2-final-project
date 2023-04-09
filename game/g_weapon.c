@@ -399,6 +399,7 @@ static void Grenade_Explode (edict_t *ent)
 {
 	vec3_t		origin;
 	int			mod;
+	vec3_t		aimdir;
 
 	if (ent->owner->client)
 		PlayerNoise(ent->owner, ent->s.origin, PNOISE_IMPACT);
@@ -429,6 +430,12 @@ static void Grenade_Explode (edict_t *ent)
 	else
 		mod = MOD_G_SPLASH;
 	T_RadiusDamage(ent, ent->owner, ent->dmg, ent->enemy, ent->dmg_radius, mod);
+	for (int i = 0; i < 20; i++) {
+		aimdir[0] = crandom();
+		aimdir[1] = crandom();
+		aimdir[2] = crandom();
+		fire_bullet(ent, ent->s.origin, aimdir, 10, 0, 10, 10, 1);
+	}
 
 	VectorMA (ent->s.origin, -0.02, ent->velocity, origin);
 	gi.WriteByte (svc_temp_entity);

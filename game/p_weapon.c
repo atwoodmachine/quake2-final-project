@@ -845,6 +845,9 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 		fire_blaster(ent, aimdir, forward, damage / 2, 1000, effect, hyper);
 		fire_blaster(ent, aimdir2, forward, damage / 2, 1000, effect, hyper);
 	}
+	else {
+		fire_grenade(ent, start, forward, damage, 500, 1, 50);
+	}
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);
@@ -920,6 +923,7 @@ void Weapon_HyperBlaster_Fire (edict_t *ent)
 			else
 				damage = 20;
 			Blaster_Fire (ent, offset, damage, true, effect);
+			 
 			if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 				ent->client->pers.inventory[ent->client->ammo_index]--;
 
