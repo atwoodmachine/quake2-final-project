@@ -1741,6 +1741,17 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		if (other->inuse && other->client->chase_target == ent)
 			UpdateChaseCam(other);
 	}
+
+
+	if (ent->healthRegen) {
+		if (ent->healPulse < level.time) {
+			if(ent->health < 100){
+				ent->health += 1;
+			}
+			ent->healPulse = level.time + 3;
+		}
+	}
+
 }
 
 

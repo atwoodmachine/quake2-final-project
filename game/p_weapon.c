@@ -832,7 +832,6 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -1;
 
-	fire_blaster (ent, start, forward, damage, 1000, effect, hyper);
 
 	aimdir[0] = start[0] + 15;
 	aimdir[1] = start[1];
@@ -842,10 +841,10 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	aimdir2[2] = start[2];
 
 	if (!hyper) {
+		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
 		fire_blaster(ent, aimdir, forward, damage / 2, 1000, effect, hyper);
 		fire_blaster(ent, aimdir2, forward, damage / 2, 1000, effect, hyper);
 	}
-
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);
@@ -1070,6 +1069,7 @@ void Chaingun_Fire (edict_t *ent)
 	vec3_t		offset;
 	int			damage;
 	int			kick = 2;
+	vec3_t aimdir;
 
 	if (deathmatch->value)
 		damage = 6;
@@ -1164,7 +1164,8 @@ void Chaingun_Fire (edict_t *ent)
 		VectorSet(offset, 0, r, u + ent->viewheight-8);
 		P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
 
-		fire_bullet (ent, start, forward, damage, kick, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, MOD_CHAINGUN);
+		//fire_bullet (ent, start, forward, damage, kick, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, MOD_CHAINGUN);
+		
 	}
 
 	// send muzzle flash
@@ -1234,7 +1235,7 @@ void weapon_shotgun_fire (edict_t *ent)
 		aimdir[0] = crandom();
 		aimdir[1] = crandom();
 		aimdir[2] = crandom();
-		fire_blaster(ent, start, aimdir, damage, 500, MZ2_FLOAT_BLASTER_1, false); //effect? 
+		fire_blaster(ent, start, aimdir, damage, 500, 2, false); //  MZ2_FLOAT_BLASTER_1
 	}
 
 	// send muzzle flash
