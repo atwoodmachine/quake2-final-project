@@ -316,7 +316,7 @@ void Cmd_God_f (edict_t *ent)
 	}
 
 	ent->flags ^= FL_GODMODE;
-	if (!(ent->flags & FL_GODMODE) )
+	if (!(ent->flags & FL_GODMODE))
 		msg = "godmode OFF\n";
 	else
 		msg = "godmode ON\n";
@@ -918,10 +918,6 @@ void Cmd_HPRegen_f(edict_t* ent) {
 	ent->healPulse = level.time;
 	gi.centerprintf(ent, "Your health now regenerates over time");
 }
-
-
-
-
 
 /*
 =================

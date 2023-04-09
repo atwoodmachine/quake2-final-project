@@ -1742,7 +1742,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 			UpdateChaseCam(other);
 	}
 
-
+	// health regen
 	if (ent->healthRegen) {
 		if (ent->healPulse < level.time) {
 			if(ent->health < 100){
