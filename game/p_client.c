@@ -1755,6 +1755,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 	if (level.killed_monsters == 0) {
 		ent->level = 0;
 		ent->prevExperienceThreshold = 5;
+		ent->experience = 0;
 	}
 	
 	if (ent->experience >= ent->prevExperienceThreshold) {

@@ -103,7 +103,10 @@ void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, v
 		{
 			level.killed_monsters++;
 			if (attacker->client) {
-				attacker->experience = level.killed_monsters;
+				attacker->experience++;
+				if (attacker->doubleXP) {
+					attacker->experience++;
+				}
 			}
 			if (coop->value && attacker->client)
 				attacker->client->resp.score++;

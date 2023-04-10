@@ -936,12 +936,30 @@ Perks
 */
 void Cmd_HPRegen_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "Stop it get some help");
+		gi.centerprintf(ent, "No player");
 	}
 	ent->healthRegen = 1;
 	ent->healPulse = level.time;
 	gi.centerprintf(ent, "Your health now regenerates over time");
 }
+
+void Cmd_DoubleXP_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+	}
+	ent->doubleXP = 1;
+	gi.centerprintf(ent, "You now gain double XP");
+}
+
+void Cmd_UpgradePistol_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+	}
+	ent->isPistolUpgraded = 1;
+	gi.centerprintf(ent, "Your blaster is now upgraded");
+}
+
+
 
 /*
 =================
@@ -1036,6 +1054,10 @@ void ClientCommand (edict_t *ent)
 		Cmd_ListExp_f(ent);
 	else if (Q_stricmp(cmd, "setExp") == 0)
 		Cmd_SetExp_f(ent);
+	else if (Q_stricmp(cmd, "doubleXP") == 0)
+		Cmd_DoubleXP_f(ent);
+	else if (Q_stricmp(cmd, "upgradePistol") == 0)
+		Cmd_UpgradePistol_f(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

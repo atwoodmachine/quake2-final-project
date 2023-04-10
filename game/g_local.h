@@ -1115,9 +1115,12 @@ struct edict_s
 	// sneppo
 	int healthRegen;
 	int healPulse;
-	int level;
+
 	int experience;
-	int prevLevel;
 	int prevExperienceThreshold;
+	int level;
+
+	int isPistolUpgraded;
+	int doubleXP;
 };
 

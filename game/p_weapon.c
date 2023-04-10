@@ -840,13 +840,16 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	aimdir2[1] = start[1];
 	aimdir2[2] = start[2];
 
-	if (!hyper) {
+	if (!hyper && !ent->isPistolUpgraded) {
 		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
 		fire_blaster(ent, aimdir, forward, damage / 2, 1000, effect, hyper);
 		fire_blaster(ent, aimdir2, forward, damage / 2, 1000, effect, hyper);
 	}
-	else {
+	if (hyper) {
 		fire_grenade(ent, start, forward, damage, 500, 1, 50);
+	}
+	if (!hyper && ent->isPistolUpgraded) {
+		fire_bullet(ent, start, forward, damage + 10, 0, 0, 0, 1);
 	}
 
 	// send muzzle flash
