@@ -907,6 +907,30 @@ Mod commands
 
 /*
 **************
+Debug commands
+**************
+*/
+void Cmd_ListExp_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+	}
+	else {
+		gi.centerprintf(ent, "Experience is: %d\nLevel is: %d", ent->experience, ent->level);
+	}
+	
+}
+
+void Cmd_SetExp_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+	}
+	ent->experience = 1;
+	ent->level = 1;
+}
+
+
+/*
+**************
 Perks
 **************
 */
@@ -1008,6 +1032,10 @@ void ClientCommand (edict_t *ent)
 		Cmd_PlayerList_f(ent);
 	else if (Q_stricmp(cmd, "regen") == 0)
 		Cmd_HPRegen_f(ent);
+	else if (Q_stricmp(cmd, "exp") == 0)
+		Cmd_ListExp_f(ent);
+	else if (Q_stricmp(cmd, "setExp") == 0)
+		Cmd_SetExp_f(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

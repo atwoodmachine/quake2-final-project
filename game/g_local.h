@@ -862,6 +862,8 @@ typedef struct
 	int			helpchanged;
 
 	qboolean	spectator;			// client is a spectator
+	int experience;
+	int level;
 } client_persistant_t;
 
 // client data that stays across deathmatch respawns
@@ -1110,7 +1112,12 @@ struct edict_s
 	moveinfo_t		moveinfo;
 	monsterinfo_t	monsterinfo;
 
+	// sneppo
 	int healthRegen;
 	int healPulse;
+	int level;
+	int experience;
+	int prevLevel;
+	int prevExperienceThreshold;
 };
 

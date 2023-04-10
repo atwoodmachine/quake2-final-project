@@ -1752,6 +1752,17 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		}
 	}
 
+	if (level.killed_monsters == 0) {
+		ent->level = 0;
+		ent->prevExperienceThreshold = 5;
+	}
+	
+	if (ent->experience >= ent->prevExperienceThreshold) {
+		ent->prevExperienceThreshold += 5;
+		ent->max_health += 5;
+		ent->level = ent->experience/5;
+		gi.centerprintf(ent, "You have leveled up to level %d!", ent->level);
+	}
 }
 
 
