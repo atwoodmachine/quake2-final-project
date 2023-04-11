@@ -1122,5 +1122,6 @@ struct edict_s
 
 	int isPistolUpgraded;
 	int doubleXP;
+	int railgunUpgraded;
 };
 

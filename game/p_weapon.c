@@ -1371,8 +1371,8 @@ void weapon_railgun_fire (edict_t *ent)
 	// sneppo
 	vec3_t aimdir = { 0 };
 	vec3_t aimdir2 = { 0 };
-	vec3_t aimAngle = { 0 };
-	vec3_t aimAngle2 = { 0 }; 
+	vec3_t aimdir3 = { 0 };
+	vec3_t aimdir4 = { 0 }; 
 
 	aimdir[0] = forward[0] + 0.5;
 	aimdir[1] = forward[1];
@@ -1380,9 +1380,20 @@ void weapon_railgun_fire (edict_t *ent)
 	aimdir2[0] = forward[0] - 0.5;
 	aimdir2[1] = forward[1];
 	aimdir2[2] = forward[2];
+	aimdir3[0] = forward[0] + 0.25;
+	aimdir3[1] = forward[1];
+	aimdir3[2] = forward[2];
+	aimdir4[0] = forward[0] - 0.25;
+	aimdir4[1] = forward[1];
+	aimdir4[2] = forward[2];
 
 	fire_rail(ent, start, aimdir, 50, kick);
 	fire_rail(ent, start, aimdir2, 50, kick);
+
+	if (ent->railgunUpgraded) {
+		fire_rail(ent, start, aimdir3, 50, kick);
+		fire_rail(ent, start, aimdir4, 50, kick);
+	}
 
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);

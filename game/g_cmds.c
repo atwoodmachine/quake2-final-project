@@ -959,6 +959,14 @@ void Cmd_UpgradePistol_f(edict_t* ent) {
 	gi.centerprintf(ent, "Your blaster is now upgraded");
 }
 
+void Cmd_UpgradeRailgun_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+	}
+	ent->railgunUpgraded = 1;
+	gi.centerprintf(ent, "Your railgun is now upgraded");
+}
+
 
 
 /*
@@ -1058,6 +1066,8 @@ void ClientCommand (edict_t *ent)
 		Cmd_DoubleXP_f(ent);
 	else if (Q_stricmp(cmd, "upgradePistol") == 0)
 		Cmd_UpgradePistol_f(ent);
+	else if (Q_stricmp(cmd, "upgradeRail") == 0)
+		Cmd_UpgradeRailgun_f(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }
