@@ -900,9 +900,9 @@ void Cmd_PlayerList_f(edict_t *ent)
 }
 
 /*
-**************
+*******************
 Mod commands
-**************
+*******************
 */
 
 /*
@@ -913,6 +913,7 @@ Debug commands
 void Cmd_ListExp_f(edict_t* ent) {
 	if (!ent->client) {
 		gi.centerprintf(ent, "No player");
+		return;
 	}
 	else {
 		gi.centerprintf(ent, "Experience is: %d\nLevel is: %d", ent->experience, ent->level);
@@ -923,11 +924,22 @@ void Cmd_ListExp_f(edict_t* ent) {
 void Cmd_SetExp_f(edict_t* ent) {
 	if (!ent->client) {
 		gi.centerprintf(ent, "No player");
+		return;
 	}
 	ent->experience = 1;
 	ent->level = 1;
 }
 
+void Cmd_Crandom_f(edict_t* ent) {
+	//gi.centerprintf(ent, "CRandom number: %d", crandom());
+	srand(time(NULL));
+	gi.centerprintf(ent, "Rand number: %d", rand() % 5);
+}
+
+void Cmd_ShrineFound_f(edict_t* ent) {
+	ent->healthSacrificeAvailable = 1;
+	ent->manaSacrificeAvailable = 1;
+}
 
 /*
 **************
@@ -937,6 +949,7 @@ Perks
 void Cmd_HPRegen_f(edict_t* ent) {
 	if (!ent->client) {
 		gi.centerprintf(ent, "No player");
+		return;
 	}
 	ent->healthRegen = 1;
 	ent->healPulse = level.time;
@@ -946,6 +959,7 @@ void Cmd_HPRegen_f(edict_t* ent) {
 void Cmd_DoubleXP_f(edict_t* ent) {
 	if (!ent->client) {
 		gi.centerprintf(ent, "No player");
+		return;
 	}
 	ent->doubleXP = 1;
 	gi.centerprintf(ent, "You now gain double XP");
@@ -954,6 +968,7 @@ void Cmd_DoubleXP_f(edict_t* ent) {
 void Cmd_UpgradePistol_f(edict_t* ent) {
 	if (!ent->client) {
 		gi.centerprintf(ent, "No player");
+		return;
 	}
 	ent->isPistolUpgraded = 1;
 	gi.centerprintf(ent, "Your blaster is now upgraded");
@@ -962,6 +977,7 @@ void Cmd_UpgradePistol_f(edict_t* ent) {
 void Cmd_UpgradeRailgun_f(edict_t* ent) {
 	if (!ent->client) {
 		gi.centerprintf(ent, "No player");
+		return;
 	}
 	ent->railgunUpgraded = 1;
 	gi.centerprintf(ent, "Your railgun is now upgraded");
@@ -970,11 +986,80 @@ void Cmd_UpgradeRailgun_f(edict_t* ent) {
 void Cmd_UpgradeHealthMax_f(edict_t* ent) {
 	if (!ent->client) {
 		gi.centerprintf(ent, "No player");
+		return;
 	}
 	ent->max_health += 50;
 	ent->health = ent->max_health;
 	gi.centerprintf(ent, "Your max health was greatly increased");
 }
+
+/*
+**************
+Sacrifice commands
+**************
+*/
+
+void Cmd_RandomPerk_f(edict_t* ent) {
+	int randomPerk = -1;
+	srand(time(NULL));
+
+	while (true) {
+		randomPerk = rand() % 5;
+		if (randomPerk == 0) {
+			if (!ent->doubleXP) {
+				Cmd_DoubleXP_f(ent);
+				return;
+			}
+		}
+		if (randomPerk == 1) {
+			Cmd_UpgradeHealthMax_f(ent);
+			return;
+		}
+		if (randomPerk == 2) {
+			if (!ent->railgunUpgraded) {
+				Cmd_UpgradeRailgun_f(ent);
+				return;
+			}
+		}
+		if (randomPerk == 3) {
+			if (!ent->isPistolUpgraded) {
+				Cmd_UpgradePistol_f(ent);
+				return;
+			}
+		}
+		if (randomPerk == 4) {
+			if (!ent->healthRegen) {
+				Cmd_HPRegen_f(ent);
+				return;
+			}
+		}
+	}
+}
+
+void Cmd_SacrificeHealth_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+		return;
+	}
+	if (ent->health <= 50) {
+		gi.centerprintf(ent, "Not enough health to sacrifice");
+		return;
+	}
+	else if (!ent->healthSacrificeAvailable) {
+		gi.centerprintf(ent, "No health sacrifice available");
+		return;
+	}
+
+	ent->health -= 50;
+	ent->healthSacrificeAvailable = 0;
+	Cmd_RandomPerk_f(ent);
+}
+
+/*
+**************
+Modifiers
+**************
+*/
 
 
 /*
@@ -1064,12 +1149,18 @@ void ClientCommand (edict_t *ent)
 		Cmd_Wave_f(ent);
 	else if (Q_stricmp(cmd, "playerlist") == 0)
 		Cmd_PlayerList_f(ent);
-	else if (Q_stricmp(cmd, "regen") == 0)
-		Cmd_HPRegen_f(ent);
+	// debug commands
 	else if (Q_stricmp(cmd, "exp") == 0)
 		Cmd_ListExp_f(ent);
 	else if (Q_stricmp(cmd, "setExp") == 0)
 		Cmd_SetExp_f(ent);
+	else if (Q_stricmp(cmd, "random") == 0)
+		Cmd_Crandom_f(ent);
+	else if (Q_stricmp(cmd, "shrine") == 0)
+		Cmd_ShrineFound_f(ent);
+	// perk commands
+	else if (Q_stricmp(cmd, "regen") == 0)
+		Cmd_HPRegen_f(ent);
 	else if (Q_stricmp(cmd, "doubleXP") == 0)
 		Cmd_DoubleXP_f(ent);
 	else if (Q_stricmp(cmd, "upgradePistol") == 0)
@@ -1078,6 +1169,9 @@ void ClientCommand (edict_t *ent)
 		Cmd_UpgradeRailgun_f(ent);
 	else if (Q_stricmp(cmd, "healthUp") == 0)
 		Cmd_UpgradeHealthMax_f(ent);
+	//sacrifice commands
+	else if (Q_stricmp(cmd, "healthSacrifice") == 0)
+		Cmd_SacrificeHealth_f(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }
