@@ -1055,6 +1055,25 @@ void Cmd_SacrificeHealth_f(edict_t* ent) {
 	Cmd_RandomPerk_f(ent);
 }
 
+void Cmd_SacrificeMana_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+		return;
+	}
+	if (ent->client->pers.inventory[ent->client->ammo_index] <= 50) {
+		gi.centerprintf(ent, "Not enough mana to sacrifice");
+		return;
+	}
+	else if (!ent->healthSacrificeAvailable) {
+		gi.centerprintf(ent, "No mana sacrifice available");
+		return;
+	}
+	
+	ent->client->pers.inventory[ent->client->ammo_index] -= 50;
+	ent->manaSacrificeAvailable = 0;
+	Cmd_RandomPerk_f(ent);
+}
+
 /*
 **************
 Modifiers
@@ -1172,6 +1191,8 @@ void ClientCommand (edict_t *ent)
 	//sacrifice commands
 	else if (Q_stricmp(cmd, "healthSacrifice") == 0)
 		Cmd_SacrificeHealth_f(ent);
+	else if (Q_stricmp(cmd, "manaSacrifice") == 0)
+		Cmd_SacrificeMana_f(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }
