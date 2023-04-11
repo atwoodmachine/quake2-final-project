@@ -967,6 +967,14 @@ void Cmd_UpgradeRailgun_f(edict_t* ent) {
 	gi.centerprintf(ent, "Your railgun is now upgraded");
 }
 
+void Cmd_UpgradeHealthMax_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+	}
+	ent->max_health += 50;
+	ent->health = ent->max_health;
+	gi.centerprintf(ent, "Your max health was greatly increased");
+}
 
 
 /*
@@ -1068,6 +1076,8 @@ void ClientCommand (edict_t *ent)
 		Cmd_UpgradePistol_f(ent);
 	else if (Q_stricmp(cmd, "upgradeRail") == 0)
 		Cmd_UpgradeRailgun_f(ent);
+	else if (Q_stricmp(cmd, "healthUp") == 0)
+		Cmd_UpgradeHealthMax_f(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }
