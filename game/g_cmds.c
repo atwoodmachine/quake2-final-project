@@ -1081,6 +1081,19 @@ Modifiers
 */
 
 // halve health
+Cmd_ModHealth_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+		return;
+	}
+	if (ent->health <= 2) {
+		ent->health = 1;
+	}
+	else {
+		ent->health = ent->health / 2;
+	}
+	gi.centerprintf(ent, "Your health has been halved");
+}
 
 // random shots from weapons
 
@@ -1203,6 +1216,9 @@ void ClientCommand (edict_t *ent)
 		Cmd_SacrificeHealth_f(ent);
 	else if (Q_stricmp(cmd, "manaSacrifice") == 0)
 		Cmd_SacrificeMana_f(ent);
+	// modifier commands
+	else if (Q_stricmp(cmd, "halfHealth") == 0)
+		Cmd_ModHealth_f(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }
