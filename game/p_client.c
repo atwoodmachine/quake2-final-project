@@ -1764,6 +1764,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		ent->level = ent->experience/5;
 		gi.centerprintf(ent, "You have leveled up to level %d!", ent->level);
 	}
+
 }
 
 

@@ -338,6 +338,10 @@ typedef struct
 	int			body_que;			// dead bodies
 
 	int			power_cubes;		// ugly necessity for coop
+
+	// SNEPPO
+	int healthSacrificeAvailable;
+	int manaSacrificeAvailable;
 } level_locals_t;
 
 
@@ -1123,8 +1127,5 @@ struct edict_s
 	int isPistolUpgraded;
 	int doubleXP;
 	int railgunUpgraded;
-
-	int healthSacrificeAvailable;
-	int manaSacrificeAvailable;
 };
 

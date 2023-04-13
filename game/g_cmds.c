@@ -937,8 +937,8 @@ void Cmd_Crandom_f(edict_t* ent) {
 }
 
 void Cmd_ShrineFound_f(edict_t* ent) {
-	ent->healthSacrificeAvailable = 1;
-	ent->manaSacrificeAvailable = 1;
+	level.healthSacrificeAvailable = 1;
+	level.manaSacrificeAvailable = 1;
 }
 
 /*
@@ -1041,17 +1041,17 @@ void Cmd_SacrificeHealth_f(edict_t* ent) {
 		gi.centerprintf(ent, "No player");
 		return;
 	}
-	if (ent->health <= 50) {
-		gi.centerprintf(ent, "Not enough health to sacrifice");
-		return;
-	}
-	else if (!ent->healthSacrificeAvailable) {
+	if (!level.healthSacrificeAvailable) {
 		gi.centerprintf(ent, "No health sacrifice available");
 		return;
 	}
-
+	else if (ent->health <= 50) {
+		gi.centerprintf(ent, "Not enough health to sacrifice");
+		return;
+	}
+	
 	ent->health -= 50;
-	ent->healthSacrificeAvailable = 0;
+	level.healthSacrificeAvailable = 0;
 	Cmd_RandomPerk_f(ent);
 }
 
@@ -1060,17 +1060,17 @@ void Cmd_SacrificeMana_f(edict_t* ent) {
 		gi.centerprintf(ent, "No player");
 		return;
 	}
-	if (ent->client->pers.inventory[ent->client->ammo_index] <= 50) {
-		gi.centerprintf(ent, "Not enough mana to sacrifice");
+	if (!level.manaSacrificeAvailable) {
+		gi.centerprintf(ent, "No mana sacrifice available");
 		return;
 	}
-	else if (!ent->healthSacrificeAvailable) {
-		gi.centerprintf(ent, "No mana sacrifice available");
+	else if (ent->client->pers.inventory[ent->client->ammo_index] < 50) {
+		gi.centerprintf(ent, "Not enough mana to sacrifice");
 		return;
 	}
 	
 	ent->client->pers.inventory[ent->client->ammo_index] -= 50;
-	ent->manaSacrificeAvailable = 0;
+	level.manaSacrificeAvailable = 0;
 	Cmd_RandomPerk_f(ent);
 }
 
@@ -1079,6 +1079,16 @@ void Cmd_SacrificeMana_f(edict_t* ent) {
 Modifiers
 **************
 */
+
+// halve health
+
+// random shots from weapons
+
+// extra pistol damage
+
+// extra ammo consumption
+
+// 
 
 
 /*

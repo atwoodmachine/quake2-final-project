@@ -156,6 +156,8 @@ void use_target_secret (edict_t *ent, edict_t *other, edict_t *activator)
 	gi.sound (ent, CHAN_VOICE, ent->noise_index, 1, ATTN_NORM, 0);
 
 	level.found_secrets++;
+	level.healthSacrificeAvailable = 1;
+	level.manaSacrificeAvailable = 1;
 
 	G_UseTargets (ent, activator);
 	G_FreeEdict (ent);
