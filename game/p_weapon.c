@@ -29,7 +29,6 @@ static byte		is_silenced;
 
 void weapon_grenade_fire (edict_t *ent, qboolean held);
 
-
 static void P_ProjectSource (gclient_t *client, vec3_t point, vec3_t distance, vec3_t forward, vec3_t right, vec3_t result)
 {
 	vec3_t	_distance;
@@ -840,16 +839,47 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	aimdir2[1] = start[1];
 	aimdir2[2] = start[2];
 
-	if (!hyper && !ent->isPistolUpgraded) {
+	if (!hyper && !ent->isPistolUpgraded && !ent->randomShots) {
 		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
 		fire_blaster(ent, aimdir, forward, damage / 2, 1000, effect, hyper);
 		fire_blaster(ent, aimdir2, forward, damage / 2, 1000, effect, hyper);
 	}
-	if (hyper) {
+	if (hyper && !ent->randomShots) {
 		fire_grenade(ent, start, forward, damage, 500, 1, 50);
 	}
-	if (!hyper && ent->isPistolUpgraded) {
+	if (!hyper && ent->isPistolUpgraded && !ent->randomShots) {
 		fire_bullet(ent, start, forward, damage + 10, 0, 0, 0, 1);
+	}
+	if (ent->randomShots) {
+		srand(time(NULL));
+		int randShot = rand() % 7;
+		
+		switch (randShot)
+		{
+		case 0:
+			fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
+			break;
+		case 1:
+			fire_grenade(ent, start, forward, 80, 500, 1, 50);
+			break;
+		case 2:
+			fire_bullet(ent, start, forward, damage, 0, 0, 0, 1);
+			break;
+		case 3:
+			fire_shotgun(ent, start, forward, damage, 0, 10, 10, 10, 1);
+			break;
+		case 4:
+			fire_bfg(ent, start, forward, 500, 500, 50);
+			break;
+		case 5: 
+			fire_rail(ent, start, forward, 100, 10);
+			break;
+		case 6: 
+			fire_rocket(ent, start, forward, 50, 500, 60, 50);
+			break;
+		default:
+			break;
+		}
 	}
 
 	// send muzzle flash

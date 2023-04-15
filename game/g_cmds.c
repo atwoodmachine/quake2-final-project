@@ -1096,6 +1096,15 @@ Cmd_ModHealth_f(edict_t* ent) {
 }
 
 // random shots from weapons
+Cmd_RandomShots_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+		return;
+	}
+
+	ent->randomShots = 1;
+	gi.centerprintf(ent, "Modifier: Blaster fires random shots");
+}
 
 // extra pistol damage
 
@@ -1219,6 +1228,8 @@ void ClientCommand (edict_t *ent)
 	// modifier commands
 	else if (Q_stricmp(cmd, "halfHealth") == 0)
 		Cmd_ModHealth_f(ent);
+	else if (Q_stricmp(cmd, "wild") == 0)
+		Cmd_RandomShots_f(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }
