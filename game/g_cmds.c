@@ -1107,10 +1107,35 @@ Cmd_RandomShots_f(edict_t* ent) {
 }
 
 // extra pistol damage
+Cmd_Instakill_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+		return;
+	}
 
+	ent->pistolInstakill = 1;
+	gi.centerprintf(ent, "Modifier: Blaster INSTAKILLS");
+}
 // extra ammo consumption
+Cmd_UseMoreAmmo_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+		return;
+	}
 
-// 
+	ent->useMoreAmmo = 1;
+	gi.centerprintf(ent, "Modifier: Increased ammo consumption");
+}
+// kills heal
+Cmd_Leech_f(edict_t* ent) {
+	if (!ent->client) {
+		gi.centerprintf(ent, "No player");
+		return;
+	}
+
+	ent->leech = 1;
+	gi.centerprintf(ent, "Modifier: Kills grant health");
+}
 
 
 /*
@@ -1230,6 +1255,12 @@ void ClientCommand (edict_t *ent)
 		Cmd_ModHealth_f(ent);
 	else if (Q_stricmp(cmd, "wild") == 0)
 		Cmd_RandomShots_f(ent);
+	else if (Q_stricmp(cmd, "instakill") == 0)
+		Cmd_Instakill_f(ent);
+	else if (Q_stricmp(cmd, "leech") == 0)
+		Cmd_Leech_f(ent);
+	else if (Q_stricmp(cmd, "ammoDump") == 0)
+		Cmd_UseMoreAmmo_f(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

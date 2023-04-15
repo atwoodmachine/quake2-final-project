@@ -1132,6 +1132,6 @@ struct edict_s
 	int randomShots;
 	int pistolInstakill;
 	int useMoreAmmo;
-
+	int leech;
 };
 

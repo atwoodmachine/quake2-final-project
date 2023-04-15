@@ -566,6 +566,9 @@ void weapon_grenade_fire (edict_t *ent, qboolean held)
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index]--;
+	if (ent->useMoreAmmo && ent->client->pers.inventory[ent->client->ammo_index] > 1) {
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+	}
 
 	ent->client->grenade_time = level.time + 1.0;
 
@@ -738,6 +741,9 @@ void weapon_grenadelauncher_fire (edict_t *ent)
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index]--;
+	if (ent->useMoreAmmo && ent->client->pers.inventory[ent->client->ammo_index] > 1) {
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+	}
 }
 
 void Weapon_GrenadeLauncher (edict_t *ent)
@@ -794,6 +800,9 @@ void Weapon_RocketLauncher_Fire (edict_t *ent)
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index]--;
+	if (ent->useMoreAmmo && ent->client->pers.inventory[ent->client->ammo_index] > 1) {
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+	}
 }
 
 void Weapon_RocketLauncher (edict_t *ent)
@@ -823,6 +832,9 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 
 	if (is_quad)
 		damage *= 4;
+	if (ent->pistolInstakill) {
+		damage *= 50;
+	}
 	AngleVectors (ent->client->v_angle, forward, right, NULL);
 	VectorSet(offset, 24, 8, ent->viewheight-8);
 	VectorAdd (offset, g_offset, offset);
@@ -959,6 +971,9 @@ void Weapon_HyperBlaster_Fire (edict_t *ent)
 			 
 			if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 				ent->client->pers.inventory[ent->client->ammo_index]--;
+			if (ent->useMoreAmmo && ent->client->pers.inventory[ent->client->ammo_index] > 1) {
+				ent->client->pers.inventory[ent->client->ammo_index]--;
+			}
 
 			ent->client->anim_priority = ANIM_ATTACK;
 			if (ent->client->ps.pmove.pm_flags & PMF_DUCKED)
@@ -1077,6 +1092,9 @@ void Machinegun_Fire (edict_t *ent)
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index]--;
+	if (ent->useMoreAmmo && ent->client->pers.inventory[ent->client->ammo_index] > 1) {
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+	}
 
 	ent->client->anim_priority = ANIM_ATTACK;
 	if (ent->client->ps.pmove.pm_flags & PMF_DUCKED)
@@ -1220,6 +1238,9 @@ void Chaingun_Fire (edict_t *ent)
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index] -= shots;
+	if (ent->useMoreAmmo && ent->client->pers.inventory[ent->client->ammo_index] > 1) {
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+	}
 }
 
 
@@ -1291,6 +1312,9 @@ void weapon_shotgun_fire (edict_t *ent)
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index]--;
+	if (ent->useMoreAmmo && ent->client->pers.inventory[ent->client->ammo_index] > 1) {
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+	}
 }
 
 void Weapon_Shotgun (edict_t *ent)
@@ -1345,6 +1369,9 @@ void weapon_supershotgun_fire (edict_t *ent)
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index] -= 2;
+	if (ent->useMoreAmmo && ent->client->pers.inventory[ent->client->ammo_index] > 1) {
+		ent->client->pers.inventory[ent->client->ammo_index] -= 2;
+	}
 }
 
 void Weapon_SuperShotgun (edict_t *ent)
@@ -1436,6 +1463,9 @@ void weapon_railgun_fire (edict_t *ent)
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index]--;
+	if (ent->useMoreAmmo && ent->client->pers.inventory[ent->client->ammo_index] > 1) {
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+	}
 }
 
 
@@ -1521,6 +1551,12 @@ void weapon_bfg_fire (edict_t *ent)
 
 	if (! ( (int)dmflags->value & DF_INFINITE_AMMO ) )
 		ent->client->pers.inventory[ent->client->ammo_index] -= 50;
+	if (ent->useMoreAmmo) {
+		if(ent->client->pers.inventory[ent->client->ammo_index] < 100)
+			ent->client->pers.inventory[ent->client->ammo_index] = 0;
+		else
+			ent->client->pers.inventory[ent->client->ammo_index] -= 50;
+	}
 }
 
 void Weapon_BFG (edict_t *ent)
