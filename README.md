@@ -43,7 +43,7 @@ When you satisfy the gods, you gain a boon. There are five boons in the game:
 To shake up the game a little, you may be occasionally afflicted with a random modifier. These modifiers may have beneficial or deleterious effects. I'll keep these modifiers a surprise for now, but they are detailed in the "testing" section below. 
 
 ### Testing
-
+You may use the console command "shrine" to allow yourself to make health and mana sacrifices.<br>
 If you want to see all the possible perks, use the following console commands:
 - "regen" for health regeneration
 - "doubleXP" for increased experience gains
