@@ -108,6 +108,9 @@ void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, v
 					attacker->experience++;
 				}
 			}
+			if (attacker->doubleXP) {
+				
+			}
 			if (attacker->leech) {
 				attacker->health += 10;
 			}

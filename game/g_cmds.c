@@ -912,7 +912,6 @@ Debug commands
 */
 void Cmd_ListExp_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 	else {
@@ -923,7 +922,6 @@ void Cmd_ListExp_f(edict_t* ent) {
 
 void Cmd_SetExp_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 	ent->experience = 1;
@@ -948,7 +946,6 @@ Perks
 */
 void Cmd_HPRegen_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 	ent->healthRegen = 1;
@@ -958,7 +955,6 @@ void Cmd_HPRegen_f(edict_t* ent) {
 
 void Cmd_DoubleXP_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 	ent->doubleXP = 1;
@@ -967,7 +963,6 @@ void Cmd_DoubleXP_f(edict_t* ent) {
 
 void Cmd_UpgradePistol_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 	ent->isPistolUpgraded = 1;
@@ -976,7 +971,6 @@ void Cmd_UpgradePistol_f(edict_t* ent) {
 
 void Cmd_UpgradeRailgun_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 	ent->railgunUpgraded = 1;
@@ -985,7 +979,6 @@ void Cmd_UpgradeRailgun_f(edict_t* ent) {
 
 void Cmd_UpgradeHealthMax_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 	ent->max_health += 50;
@@ -1038,7 +1031,6 @@ void Cmd_RandomPerk_f(edict_t* ent) {
 
 void Cmd_SacrificeHealth_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 	if (!level.healthSacrificeAvailable) {
@@ -1057,7 +1049,6 @@ void Cmd_SacrificeHealth_f(edict_t* ent) {
 
 void Cmd_SacrificeMana_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 	if (!level.manaSacrificeAvailable) {
@@ -1083,7 +1074,6 @@ Modifiers
 // halve health
 Cmd_ModHealth_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 	if (ent->health <= 2) {
@@ -1098,7 +1088,6 @@ Cmd_ModHealth_f(edict_t* ent) {
 // random shots from weapons
 Cmd_RandomShots_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 
@@ -1109,7 +1098,6 @@ Cmd_RandomShots_f(edict_t* ent) {
 // extra pistol damage
 Cmd_Instakill_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 
@@ -1119,7 +1107,6 @@ Cmd_Instakill_f(edict_t* ent) {
 // extra ammo consumption
 Cmd_UseMoreAmmo_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 
@@ -1129,7 +1116,6 @@ Cmd_UseMoreAmmo_f(edict_t* ent) {
 // kills heal
 Cmd_Leech_f(edict_t* ent) {
 	if (!ent->client) {
-		gi.centerprintf(ent, "No player");
 		return;
 	}
 
