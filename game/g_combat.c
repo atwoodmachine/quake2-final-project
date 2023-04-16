@@ -109,7 +109,10 @@ void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, v
 				}
 			}
 			if (attacker->doubleXP) {
-				
+				gi.bprintf(PRINT_HIGH, "Earned 2 exp\n");
+			}
+			else {
+				gi.bprintf(PRINT_HIGH, "Earned 1 exp\n");
 			}
 			if (attacker->leech) {
 				attacker->health += 10;

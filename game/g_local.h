@@ -1133,5 +1133,11 @@ struct edict_s
 	int pistolInstakill;
 	int useMoreAmmo;
 	int leech;
+
+	// modifier timers
+	int randomShotsTimer;
+	int instakillTimer;
+	int ammoTimer;
+	int leechTimer;
 };
 

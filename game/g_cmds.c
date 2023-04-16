@@ -1092,6 +1092,7 @@ Cmd_RandomShots_f(edict_t* ent) {
 	}
 
 	ent->randomShots = 1;
+	ent->randomShotsTimer = level.time + 10;
 	gi.centerprintf(ent, "Modifier: Blaster fires random shots");
 }
 
@@ -1102,6 +1103,7 @@ Cmd_Instakill_f(edict_t* ent) {
 	}
 
 	ent->pistolInstakill = 1;
+	ent->instakillTimer = level.time + 15;
 	gi.centerprintf(ent, "Modifier: Blaster INSTAKILLS");
 }
 // extra ammo consumption
@@ -1111,6 +1113,7 @@ Cmd_UseMoreAmmo_f(edict_t* ent) {
 	}
 
 	ent->useMoreAmmo = 1;
+	ent->ammoTimer = level.time + 10;
 	gi.centerprintf(ent, "Modifier: Increased ammo consumption");
 }
 // kills heal
@@ -1120,6 +1123,7 @@ Cmd_Leech_f(edict_t* ent) {
 	}
 
 	ent->leech = 1;
+	ent->leechTimer = level.time + 15;
 	gi.centerprintf(ent, "Modifier: Kills grant health");
 }
 

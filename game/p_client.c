@@ -1752,6 +1752,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		}
 	}
 
+	// leveling
 	if (level.killed_monsters == 0) {
 		ent->level = 0;
 		ent->prevExperienceThreshold = 5;
@@ -1763,6 +1764,25 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		ent->max_health += 5;
 		ent->level = ent->experience/5;
 		gi.centerprintf(ent, "You have leveled up to level %d!", ent->level);
+	}
+
+	// mod timers
+
+	if (ent->leech && ent->leechTimer < level.time) {
+		ent->leech = 0;
+		gi.centerprintf(ent, "Leech modifier has ended");
+	}
+	if (ent->pistolInstakill && ent->instakillTimer < level.time) {
+		ent->pistolInstakill = 0;
+		gi.centerprintf(ent, "Instakill modifier has ended");
+	}
+	if (ent->useMoreAmmo && ent->ammoTimer < level.time) {
+		ent->useMoreAmmo = 0;
+		gi.centerprintf(ent, "Increased ammo usage has ended");
+	}
+	if (ent->randomShots && ent->randomShotsTimer < level.time) {
+		ent->randomShots = 0;
+		gi.centerprintf(ent, "Random shots modifier has ended");
 	}
 
 }
