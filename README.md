@@ -2,7 +2,6 @@ Hello, and welcome to my Quake 2 mod.
 
 This mod is inspired by the roguelike game "Ziggurat". In this mod, several new mechanics have been added to Quake 2 and a lot of the fundamental assumptions about the game have been shaken up!
 
-
 ### New mechanic: experience and leveling
 
 You gain experience as you defeat enemies in the game. When you get 5 experience points, you level up, increasing your health maximum.
