@@ -39,7 +39,7 @@ When you satisfy the gods, you gain a boon. There are five boons in the game:
 
 ### Modifiers
 
-To shake up the game a little, you may be occasionally afflicted with a random modifier. These modifiers may have beneficial or deleterious effects. I'll keep these modifiers a surprise for now, but they are detailed in the "testing" section below. 
+To shake up the game a little, you will be afflicted with a random modifier upon entering a level. These modifiers may have beneficial or deleterious effects. I'll keep these modifiers a surprise for now, but they are detailed in the "testing" section below. 
 
 ### Testing
 You may use the console command "shrine" to allow yourself to make health and mana sacrifices.<br>
