@@ -606,6 +606,9 @@ extern	gitem_t	itemlist[];
 void Cmd_Help_f (edict_t *ent);
 void Cmd_Score_f (edict_t *ent);
 
+// commands we need to access elsewhere
+void Cmd_Modifier_f (edict_t* ent);
+
 //
 // g_items.c
 //

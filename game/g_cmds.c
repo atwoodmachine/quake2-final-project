@@ -1072,7 +1072,7 @@ Modifiers
 */
 
 // halve health
-Cmd_ModHealth_f(edict_t* ent) {
+void Cmd_ModHealth_f(edict_t* ent) {
 	if (!ent->client) {
 		return;
 	}
@@ -1086,45 +1086,74 @@ Cmd_ModHealth_f(edict_t* ent) {
 }
 
 // random shots from weapons
-Cmd_RandomShots_f(edict_t* ent) {
+void Cmd_RandomShots_f(edict_t* ent) {
 	if (!ent->client) {
 		return;
 	}
 
 	ent->randomShots = 1;
-	ent->randomShotsTimer = level.time + 10;
+	ent->randomShotsTimer = level.time + 45;
 	gi.centerprintf(ent, "Modifier: Blaster fires random shots");
 }
 
 // extra pistol damage
-Cmd_Instakill_f(edict_t* ent) {
+void Cmd_Instakill_f(edict_t* ent) {
 	if (!ent->client) {
 		return;
 	}
 
 	ent->pistolInstakill = 1;
-	ent->instakillTimer = level.time + 15;
+	ent->instakillTimer = level.time + 45;
 	gi.centerprintf(ent, "Modifier: Blaster INSTAKILLS");
 }
 // extra ammo consumption
-Cmd_UseMoreAmmo_f(edict_t* ent) {
+void Cmd_UseMoreAmmo_f(edict_t* ent) {
 	if (!ent->client) {
 		return;
 	}
 
 	ent->useMoreAmmo = 1;
-	ent->ammoTimer = level.time + 10;
+	ent->ammoTimer = level.time + 45;
 	gi.centerprintf(ent, "Modifier: Increased ammo consumption");
 }
 // kills heal
-Cmd_Leech_f(edict_t* ent) {
+void Cmd_Leech_f(edict_t* ent) {
 	if (!ent->client) {
 		return;
 	}
 
 	ent->leech = 1;
-	ent->leechTimer = level.time + 15;
+	ent->leechTimer = level.time + 45;
 	gi.centerprintf(ent, "Modifier: Kills grant health");
+}
+
+void Cmd_Modifier_f(edict_t* ent) {
+	int randomMod = -1;
+	srand(time(NULL));
+
+	while (true) {
+		randomMod = rand() % 5;
+		if (randomMod == 0) {
+			Cmd_Instakill_f(ent);
+			break;
+		}
+		if (randomMod == 1) {
+			Cmd_RandomShots_f(ent);
+			return;
+		}
+		if (randomMod == 2) {
+			Cmd_ModHealth_f(ent);
+			return;
+		}
+		if (randomMod == 3) {
+			Cmd_Leech_f(ent);
+			return;
+		}
+		if (randomMod == 4) {
+			Cmd_UseMoreAmmo_f(ent);
+			return;
+		}
+	}
 }
 
 
@@ -1251,6 +1280,8 @@ void ClientCommand (edict_t *ent)
 		Cmd_Leech_f(ent);
 	else if (Q_stricmp(cmd, "ammoDump") == 0)
 		Cmd_UseMoreAmmo_f(ent);
+	else if (Q_stricmp(cmd, "randMod") == 0)
+		Cmd_Modifier_f(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

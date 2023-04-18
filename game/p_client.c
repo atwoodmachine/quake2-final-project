@@ -1284,7 +1284,6 @@ void ClientBeginDeathmatch (edict_t *ent)
 	ClientEndServerFrame (ent);
 }
 
-
 /*
 ===========
 ClientBegin
@@ -1346,6 +1345,7 @@ void ClientBegin (edict_t *ent)
 	}
 
 	// make sure all view stuff is valid
+	Cmd_Modifier_f(ent);
 	ClientEndServerFrame (ent);
 }
 
