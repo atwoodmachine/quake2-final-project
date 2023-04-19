@@ -853,8 +853,8 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 
 	if (!hyper && !ent->isPistolUpgraded && !ent->randomShots) {
 		fire_blaster(ent, start, forward, damage, 1000, effect, hyper);
-		fire_blaster(ent, aimdir, forward, damage / 2, 1000, effect, hyper);
-		fire_blaster(ent, aimdir2, forward, damage / 2, 1000, effect, hyper);
+		fire_blaster(ent, aimdir, forward, damage / 4, 1000, effect, hyper);
+		fire_blaster(ent, aimdir2, forward, damage / 4, 1000, effect, hyper);
 	}
 	if (hyper && !ent->randomShots) {
 		fire_grenade(ent, start, forward, damage, 500, 1, 50);
