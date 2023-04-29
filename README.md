@@ -2,7 +2,11 @@ Hello, and welcome to my Quake 2 mod.
 
 This mod is inspired by the roguelike game "Ziggurat". In this mod, several new mechanics have been added to Quake 2 and a lot of the fundamental assumptions about the game have been shaken up!
 
-### New mechanic: experience and leveling
+### Download and play
+
+I've put the gamex86.dll and config file necessary to play in the folder called "ziggurat". Simply download it, put it in your Quake 2 folder, and use the command 'setgame ziggurat' (or replace 'ziggurat' with whatever you called the folder you put those files in) to play. Alternatively, you can download the repo and compile it yourself! Maybe even play with the game balance if you have the know-how.
+
+### Experience and leveling
 
 You gain experience as you defeat enemies in the game. When you get 5 experience points, you level up, increasing your health maximum.
 
