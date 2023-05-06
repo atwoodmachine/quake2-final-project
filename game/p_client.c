@@ -1745,7 +1745,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 	// health regen
 	if (ent->healthRegen) {
 		if (ent->healPulse < level.time) {
-			if(ent->health < 100){
+			if(ent->health < ent->max_health){
 				ent->health += 1;
 			}
 			ent->healPulse = level.time + 3;

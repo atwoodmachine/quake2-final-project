@@ -13,6 +13,7 @@ You gain experience as you defeat enemies in the game. When you get 5 experience
 ### Spells
 
 Your weapons have become unstable spells!
+
 - Your blaster fires 3 shots.
 - Your shotgun fires wildly in all directions.
 - Your super shotgun causes you to self immolate, damaging you and enemies around you.
@@ -20,7 +21,7 @@ Your weapons have become unstable spells!
 - Your chaingun will grant you invulnerability, the effect lasting longer the longer you cast it.
 - Your grenade launcher summons an orb of power that stays in place and fires lasers at enemies.
 - Your rocket launcher casts dancing lights in its wake.
-- Your hyperblaster has been loaded with fragmentation grenades. 
+- Your hyperblaster has been loaded with fragmentation grenades.
 - Your railgun fires beams in a cone.
 - Your BFG now heals you up to your hitpoint maximum.
 - Your grenades are now cluster bombs.
@@ -43,18 +44,21 @@ When you satisfy the gods, you gain a boon. There are five boons in the game:
 
 ### Modifiers
 
-To shake up the game a little, you will be afflicted with a random modifier upon entering a level. These modifiers may have beneficial or deleterious effects. I'll keep these modifiers a surprise for now, but they are detailed in the "testing" section below. 
+To shake up the game a little, you will be afflicted with a random modifier upon entering a level. These modifiers may have beneficial or deleterious effects. I'll keep these modifiers a surprise for now, but they are detailed in the "testing" section below.
 
 ### Testing
+
 You may use the console command "shrine" to allow yourself to make health and mana sacrifices.<br>
 If you want to see all the possible perks, use the following console commands:
+
 - "regen" for health regeneration
 - "doubleXP" for increased experience gains
 - "upgradePistol" to upgrade the blaster
-- "upgradeRailgun" to upgrade the railgun
+- "upgradeRail" to upgrade the railgun
 - "healthUp" to upgrade your health and heal up
 
 You may also see every modifier in the game using the following commands:
+
 - "halfHealth" to instantly drop you to half your current health total
 - "wild" to cause your blaster to fire random shots
 - "instakill" to give your blaster enough damage to instakill foes

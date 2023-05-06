@@ -1224,7 +1224,7 @@ void Chaingun_Fire (edict_t *ent)
 
 		//fire_bullet (ent, start, forward, damage, kick, DEFAULT_BULLET_HSPREAD, DEFAULT_BULLET_VSPREAD, MOD_CHAINGUN);
 
-		ent->client->invincible_framenum += shots; // chaingun provides invincibility
+		ent->client->invincible_framenum += shots * 3; // chaingun provides invincibility
 	}
 
 
